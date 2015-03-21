@@ -7,10 +7,12 @@
   },
   "engines": {
     "node" : "0.10.x",
-    "npm" : "1.4.x",
+    "npm" : "2.7.x",
     "nodemon" : "1.3.x"
   },
   "dependencies": {
+
+    "npm" : "2.7.x",
     "body-parser": "~1.12.0",
     "cookie-parser": "~1.3.4",
     "debug": "~2.1.1",
