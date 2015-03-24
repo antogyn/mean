@@ -2,8 +2,8 @@ var mongoose = require( 'mongoose' );
 var gracefulShutdown;
 
 var host = process.env.IP || 'localhost';
-var port = 28017; // 27017?
-var dbURI = 'mongodb://' + host + ':' + port + '/database';
+var port = 27017; // 27017?
+var dbURI = 'mongodb://' + host + ':' + port + '/my-app';
 
 if (process.env.NODE_ENV === 'production') {
     dbURI = process.env.MONGOLAB_URI;

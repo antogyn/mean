@@ -9,9 +9,6 @@ var users = require('./routes/users');
 
 var app = express();
 
-// db
-require('./app_server/models/db');
-
 // routes
 require('./routes')(app);
 

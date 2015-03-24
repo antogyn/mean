@@ -31,6 +31,12 @@ server.on('error', onError);
 server.on('listening', onListening);
 
 /**
+ * Connect to database. 
+ */
+ 
+require('../app_server/models/db');
+
+/**
  * Normalize a port into a number, string, or false.
  */
 
