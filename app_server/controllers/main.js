@@ -1,7 +1,7 @@
 module.exports.about = function(req, res) {
-    res.render('index', { title: 'about' });
+    res.render('about', { title: 'About' });
 };
 
 module.exports.signin = function(req, res) {
-    res.render('index', { title: 'signin' });
+    res.render('signin-index', { title: 'Sign in' });
 };

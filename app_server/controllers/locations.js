@@ -1,6 +1,22 @@
 /* GET home page */
 module.exports.homelist = function(req, res) {
-    res.render('locations-list', { title: 'Home' });
+    res.render('locations-list', {
+        title: 'Home',
+        locations: [{
+            name: 'My place',
+            address: 'localhost',
+            rating: 5,
+            facilities: ['Everything'],
+            distance:'0m'
+        },{
+            name: 'Random place',
+            address: '25 rue des Pommiers, 78330, Fontenay-le-Fleury',
+            rating: 3,
+            facilities: ['Coffee','Food','Free wifi'],
+            distance:'500m'
+        }]
+    
+    });
 };
 
 /* GET home page */
