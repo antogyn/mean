@@ -2,7 +2,7 @@ var mongoose = require( 'mongoose' );
 var gracefulShutdown;
 
 var host = process.env.IP || 'localhost';
-var port = 27017; // 27017?
+var port = 27017;
 var dbURI = 'mongodb://' + host + ':' + port + '/my-app';
 
 if (process.env.NODE_ENV === 'production') {

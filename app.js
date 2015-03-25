@@ -12,6 +12,9 @@ var app = express();
 // routes
 require('./routes')(app);
 
+// API routes
+require('./app_api/routes')(app);
+
 // view engine setup
 app.set('views', path.join(__dirname, '/app_server/views'));
 app.set('view engine', 'jade');

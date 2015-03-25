@@ -1,6 +1,12 @@
 #!/usr/bin/env node
 
 /**
+ * Connect to database (API).
+ */
+ 
+require('../app_api/models/db');
+
+/**
  * Module dependencies.
  */
 
@@ -29,12 +35,6 @@ var server = http.createServer(app);
 server.listen(port, hostname);
 server.on('error', onError);
 server.on('listening', onListening);
-
-/**
- * Connect to database. 
- */
- 
-require('../app_server/models/db');
 
 /**
  * Normalize a port into a number, string, or false.
