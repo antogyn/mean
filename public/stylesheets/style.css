@@ -7,6 +7,10 @@ a {
 .list-group-item {
     margin: 1px;
 }
+.list-group-item-container {
+    padding: 0;
+}
+
 .badge {
     background-color: #2B3E50;
 }
@@ -15,7 +19,10 @@ a {
     background-color: #0A6D98;
 }
 
-.review {padding-bottom: 5px;}
+.review {
+    padding-bottom: 5px;
+    
+}
 .panel-body.review-container {padding-top: 0;}
 .review-header {
     padding: 10px;

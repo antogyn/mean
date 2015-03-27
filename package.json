@@ -19,6 +19,7 @@
     "morgan": "~1.5.1",
     "serve-favicon": "~2.2.0",
     "express-session": "1.10.x",
-    "mongoose": "3.8.x"
+    "mongoose": "3.8.x",
+    "multer": "0.1.x"
   }
 }
