@@ -4,10 +4,28 @@ block content
 
   #banner.page-header
     .row
-      .col-md-6.col-xs-12
+      .col-md-10.col-xs-12
         h1= title
   .row
-    .col-md-6.col-xs-12
+    .col-md-10.col-xs-12
+      p
+        | URLs and request methods for the REST api (anyone can use it) : <br/>
+        p
+          | <h4>Locations :</h4>
+          | '/api/locations' - GET - params : Number lng (REQ), Number lat (REQ), Number maxdist (default 20) <br/>
+          | '/api/locations' - POST - params : String name (REQ), String address (REQ), List&lt;String&gt; facilities,
+          | Number lng (REQ), Number lat (REQ), String day1 (REQ), String opening1 (REQ), String closing1 (REQ),
+          | Boolean closed1 (REQ), String day2 (REQ), String opening2 (REQ), String closing2 (REQ),
+          | Boolean closed2 (REQ) <br/>
+          | '/api/locations/:locationid' - GET - no param <br/>
+          | '/api/locations/:locationid' - PUT - params : same as #2 <br/>
+          | '/api/locations/:locationid' - DELETE - no param <br/>
+        p
+          | <h4>Reviews :</h4>
+          | '/api/locations/:locationid/reviews' - POST - params : String author (REQ), String rating (REQ), String reviewText (REQ) <br/>
+          | '/api/locations/:locationid/reviews/:reviewid' - GET - no param <br/>
+          | '/api/locations/:locationid/reviews/:reviewid' - PUT - same as #1 <br/>
+          | '/api/locations/:locationid/reviews/:reviewid' - DELETE - no param <br/>
       p
         | This website is the best.
         | <br/><br/>
