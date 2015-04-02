@@ -37,8 +37,9 @@ var getLocationsFromGeo = function(results) {
             _id: doc.obj._id
         });
         */
-        doc.distance = theEarth.getDistanceFromRads(doc.dis);
-        locations.push(doc);
+        var obj = doc.obj.toObject();
+        obj['distance'] = theEarth.getDistanceFromRads(doc.dis);
+        locations.push(obj);
     });
     return locations;
 };

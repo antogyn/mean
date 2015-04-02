@@ -20,6 +20,7 @@
     "serve-favicon": "~2.2.0",
     "express-session": "1.10.x",
     "mongoose": "3.8.x",
-    "multer": "0.1.x"
+    "multer": "0.1.x",
+    "request": "2.54.x"
   }
 }

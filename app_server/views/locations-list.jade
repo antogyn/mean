@@ -10,12 +10,13 @@ block content
           
   .row
     .col-md-8.col-lg-9
+      .error #{errorMessage}
       .row.list-group
         each location in locations
           .col-xs-12.col-lg-6.list-group-item-container
             .list-group-item
               h4
-                a(href="/location") #{location.name}
+                a(href="/location/#{location._id}") #{location.name}
                 small &nbsp;
                   +outputRating(location.rating)
                 span.badge.pull-right.badge-default #{location.distance}

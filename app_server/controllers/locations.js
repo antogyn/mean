@@ -1,22 +1,65 @@
-/* GET home page */
-module.exports.homelist = function(req, res) {
+var request = require('request');
+
+var port = process.env.PORT || '5000';
+var hostname = process.env.IP || '0.0.0.0';
+
+var apiOptions = {
+  server : "http://" + hostname + ":" + port
+};
+
+if (process.env.NODE_ENV === 'production') {
+  apiOptions.server = "https://antogyn-mean.herokuapp.com";
+}
+
+var _formatDistance = function(distance) {
+    if (distance > 1) {
+        return parseFloat(distance).toFixed(1) + 'km';
+    } else {
+        return parseInt(distance*1000, 10) + 'm';
+    }
+};
+
+var renderHomepage = function(req, res, err, locations) {
+    var errorMessage;
+    if (err || !(locations instanceof Array)) {
+        errorMessage = "API lookup error";
+        locations = [];
+    } else if (!locations.length) {
+        errorMessage = "No places found nearby";
+    }
+    
+    var i, n;
+    for (i=0, n=locations.length; i<n; i++) {
+        locations[i].distance = _formatDistance(locations[i].distance);
+    }
+    
     res.render('locations-list', {
         title: 'Home',
-        locations: [{
-            name: 'My place',
-            address: 'localhost',
-            rating: 5,
-            facilities: ['Everything'],
-            distance:'0m'
-        },{
-            name: 'Random place',
-            address: '25 rue des Pommiers, 78330, Fontenay-le-Fleury',
-            rating: 3,
-            facilities: ['Coffee','Food','Free wifi'],
-            distance:'500m'
-        }]
-    
+        locations: locations,
+        errorMessage: errorMessage
     });
+};
+
+/* GET home page */
+module.exports.homelist = function(req, res) {
+    var requestOptions, path;
+    path = '/api/locations';
+    requestOptions = {
+        url : apiOptions.server + path,
+        method : "GET",
+        json : {},
+        qs : {
+            lat : 48.811553,
+            lng : 2.040610,
+            maxdist : Infinity // everything
+        }
+    };
+    request(
+        requestOptions,
+        function(err, response, body) {
+            renderHomepage(req, res, err, body);
+        }
+    );
 };
 
 /* GET home page */
