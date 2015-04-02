@@ -144,7 +144,7 @@ module.exports.locationsListByDistance = function(req, res) {
         });
         return;
     }
-    
+    // "The default datum for an earth-like sphere is WGS84. Coordinate-axis order is longitude, latitude."
     var point = {
         type: "Point",
         coordinates: [lng, lat]

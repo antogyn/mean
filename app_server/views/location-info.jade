@@ -4,47 +4,41 @@ block content
 
   #banner.page-header
     .row.col-xs-12
-        h1 Random place
+        h1 #{location.name}
     .row
       .col-xs-12.col-md-9
         .row
-          .col-xs-12.col-sm-6
+          .col-xs-12.col-sm-5
             p.rating
-              span.glyphicon.glyphicon-star
-              span.glyphicon.glyphicon-star
-              span.glyphicon.glyphicon-star
-              span.glyphicon.glyphicon-star-empty
-              span.glyphicon.glyphicon-star-empty
-            p 25 rue des Pommiers, 78330, Fontenay-le-Fleury
+              +outputRating(location.rating)
+            p #{location.address}
             .panel.panel-primary
               .panel-heading
                 h2.panel-title Opening hours
               .panel-body
-                p Monday - Friday : 7:00am - 7:00pm
-                p Saturday : 8:00am - 5:00pm
-                p Sunday : closed
+                each openingTime in location.openingTimes
+                  if openingTime.closed
+                    p #{openingTime.days} : closed
+                  else
+                    p #{openingTime.days} : #{openingTime.opening} - #{openingTime.closing}
             .panel.panel-primary
               .panel-heading
                 h2.panel-title Facilities
               .panel-body
-                span.label.label-warning
-                  span.glyphicon.glyphicon-ok
-                  | &nbsp;Coffee
-                | &nbsp;
-                span.label.label-warning
-                  span.glyphicon.glyphicon-ok
-                  | &nbsp;Food
-                | &nbsp;
-                span.label.label-warning
-                  span.glyphicon.glyphicon-ok
-                  | &nbsp;Free wifi
-                | &nbsp;
-          .col-xs-12.col-sm-6.location-map
+                each facility in location.facilities
+                  span.label.label-warning
+                    span.glyphicon.glyphicon-ok
+                    | &nbsp;#{facility}
+                  | &nbsp;
+          .col-xs-12.col-sm-7.location-map
             .panel.panel-primary
               .panel-heading
                 h2.panel-title Location map
               .panel-body
-                img.img-responsive.img-rounded(src='http://maps.googleapis.com/maps/api/staticmap?center=51.455041,-0.9690884&zoom=17&size=400x350&sensor=false&markers=51.455041,-0.9690884&scale=2')
+                iframe(width='100%', height='350px', frameborder='0', style='border:0',
+                  src='https://www.google.com/maps/embed/v1/view?key=AIzaSyDB_eaVL5S7HtL2lIgb4yYM-opEDr3YG_U\
+                  &center=#{location.coords[1]},#{location.coords[0]}&zoom=17')
+                  
         .row
           .col-xs-12
             .panel.panel-primary.review-panel
@@ -54,30 +48,16 @@ block content
                 h2.panel-title Customer reviews
               .panel-body.review-container
                 .row
-                  .review.col-xs-12
-                    .review-header
-                        span.rating
-                          span.glyphicon.glyphicon-star
-                          span.glyphicon.glyphicon-star
-                          span.glyphicon.glyphicon-star
-                          span.glyphicon.glyphicon-star
-                          span.glyphicon.glyphicon-star
-                        span.reviewAuthor Alexis Dirdir
-                        small.reviewTimestamp 20 Mars 2015
-                    .review-content
-                      p This place is the best !
-                  .review.col-xs-12
-                    .review-header
-                      span.rating
-                        span.glyphicon.glyphicon-star
-                        span.glyphicon.glyphicon-star
-                        span.glyphicon.glyphicon-star
-                        span.glyphicon.glyphicon-star-empty
-                        span.glyphicon.glyphicon-star-empty
-                      span.reviewAuthor Siqin Wang
-                      small.reviewTimestamp 22 Mars 2015
-                    .review-content
-                      p It was okay. Coffee wasn't great, but the wifi was fast.
+                  each review in location.reviews
+                    .review.col-xs-12
+                      .review-header
+                          span.rating
+                            +outputRating(review.rating)
+                          span.reviewAuthor #{review.author.displayName}
+                          small.reviewTimestamp #{review.createdOn}
+                      .review-content
+                        p #{review.reviewText}
+
       .col-xs-12.col-md-3
         p.lead
           | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lorem massa, lacinia at velit non, facilisis bibendum nulla. Integer vel.

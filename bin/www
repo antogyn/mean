@@ -1,6 +1,17 @@
 #!/usr/bin/env node
 
 /**
+ * env file
+ */
+ 
+var env = require('node-env-file');
+try {
+  env('../.env');
+} catch (err) {
+  console.log("No .env file found.");
+}
+
+/**
  * Connect to database (API).
  */
  

@@ -40,6 +40,19 @@ var renderHomepage = function(req, res, err, locations) {
     });
 };
 
+var renderLocationInfo = function(req, res, err, location) {
+    var errorMessage;
+    if (err) {
+        errorMessage = "API lookup error";
+        location = {};
+    }
+    res.render('location-info', {
+        title: 'Location info',
+        location: location,
+        errorMessage: errorMessage
+    });
+};
+
 /* GET home page */
 module.exports.homelist = function(req, res) {
     var requestOptions, path;
@@ -64,7 +77,20 @@ module.exports.homelist = function(req, res) {
 
 /* GET home page */
 module.exports.locationInfo = function(req, res) {
-    res.render('location-info', { title: 'Location info' });
+    
+    var requestOptions, path;
+    path = '/api/locations/' + req.params.locationid;
+    requestOptions = {
+        url : apiOptions.server + path,
+        method : "GET",
+        json : {},
+    };
+    request(
+        requestOptions,
+        function(err, response, body) {
+            renderLocationInfo(req, res, err, body);
+        }
+    );
 };
 
 /* GET home page */
