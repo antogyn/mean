@@ -5,12 +5,14 @@ block content
       h1 Review #{location.name}
   .row
     .col-xs-12.col-md-8
-      form.form-horizontal(action="/location/#{location._id}/review/new", method="post", role="form")
+      form.form-horizontal(action="/location/#{location._id}/reviews/new", method="post", role="form")
+        - if (error == "val")
+          .alert.alert-danger(role="alert") All fields required, please try again
         .form-group
-          label.col-xs-2.col-sm-2.control-label(for="name") Name
+          label.col-xs-2.col-sm-2.control-label(for="author") Name
           .col-xs-10.col-sm-10
             p
-              input.form-control(type="text", placeholder="Your name", name="name")
+              input.form-control(type="text", placeholder="Your name", name="author")
           label.col-xs-10.col-sm-2.control-label(for="rating") Rating
           .col-xs-12.col-sm-2
             select.form-control.input-sm(name="rating")

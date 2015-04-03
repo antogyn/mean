@@ -88,7 +88,8 @@ var renderLocationInfo = function(req, res, location) {
 var renderLocationReviewForm = function(req, res, location) {
     res.render('location-review-form', {
         title: 'Review '+ location.name,
-        location: location
+        location: location,
+        error: req.query.err
     });
 };
 
@@ -134,7 +135,7 @@ module.exports.doAddReview = function(req, res) {
     locationid = req.params.locationid;
     path = "/api/locations/" + locationid + '/reviews';
     postdata = {
-        author: req.body.name,
+        author: req.body.author,
         rating: parseInt(req.body.rating, 10),
         reviewText: req.body.review
     };
@@ -148,6 +149,8 @@ module.exports.doAddReview = function(req, res) {
         function(err, response, body) {
             if (response.statusCode === 201) {
                 res.redirect('/location/' + locationid);
+            } else if (response.statusCode === 400 && body.name && body.name === "ValidationError" ) {
+                res.redirect('/location/' + locationid + '/reviews/new?err=val');
             } else {
                 _showError(req, res, response.statusCode);
             }
