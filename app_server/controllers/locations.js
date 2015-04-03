@@ -40,16 +40,10 @@ var renderHomepage = function(req, res, err, locations) {
     });
 };
 
-var renderLocationInfo = function(req, res, err, location) {
-    var errorMessage;
-    if (err) {
-        errorMessage = "API lookup error";
-        location = {};
-    }
+var renderLocationInfo = function(req, res, location) {
     res.render('location-info', {
         title: 'Location info',
         location: location,
-        errorMessage: errorMessage
     });
 };
 
@@ -87,10 +81,32 @@ module.exports.locationInfo = function(req, res) {
     };
     request(
         requestOptions,
-        function(err, response, body) {
-            renderLocationInfo(req, res, err, body);
+        function(err, response, location) {
+            if (response.statusCode === 200) {
+                renderLocationInfo(req, res, location);
+            } else {
+                _showError(req, res, response.statusCode, err);
+            }
         }
     );
+};
+
+/** todo : use globally */
+var _showError = function(req, res, status, err) {
+    var title, message;
+    if (status === 404) {
+        title = "404, page not found";
+        message = "Looks like we can't find that page. Sorry.";
+    } else {
+        title = status + ", something's gone wrong";
+        message = "Woops, something has gone wrong.";
+    }
+    res.status(status);
+    res.render('bad-status', {
+        title: title,
+        message: message,
+        error: err
+    });
 };
 
 /* GET home page */

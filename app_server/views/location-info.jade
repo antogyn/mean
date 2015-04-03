@@ -53,7 +53,8 @@ block content
                           span.rating
                             +outputRating(review.rating)
                           span.reviewAuthor #{review.author.displayName}
-                          small.reviewTimestamp #{review.createdOn}
+                          small.reviewTimestamp
+                            +formatDate(review.createdOn)
                       .review-content
                         p #{review.reviewText}
 

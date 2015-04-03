@@ -7,6 +7,15 @@ a {
 .list-group-item {
     margin: 1px;
 }
+
+.list-group-item:last-child {
+    margin: 1px;
+}
+
+.list-group-item:first-child {
+    margin: 1px;
+}
+
 .list-group-item-container {
     padding: 0;
 }
